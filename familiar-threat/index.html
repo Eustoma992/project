@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>密切关系威胁识别 · 审计独立性自测工具</title>
+  <meta name="description" content="面向审计/鉴证业务的密切关系威胁（Familiarity Threat）识别、风险自测、情景演练与案例学习工具。数据本地处理，隐私安全。" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="威胁识别" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top">
+        <span class="brand__logo">🔍</span>
+        <span>密切关系威胁识别</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="菜单" aria-expanded="false">☰</button>
+      <nav class="nav__menu" id="nav-menu">
+        <a data-scroll="top">首页</a>
+        <a data-scroll="knowledge">威胁情形</a>
+        <a data-scroll="self-test">威胁自测</a>
+        <a data-scroll="scenarios">情景演练</a>
+        <a data-scroll="cases">案例库</a>
+        <a data-scroll="safeguards">防范清单</a>
+        <a data-scroll="ai-assistant">AI 助手</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero__inner">
+      <div>
+        <span class="hero__badge">审计 · 鉴证业务 · 独立性</span>
+        <h1>识别「密切关系威胁」<br />守住审计独立性</h1>
+        <p>
+          当鉴证小组成员与鉴证客户之间存在亲密、信任或熟悉关系，就可能产生密切关系威胁（Familiarity Threat），
+          使审计师失去应有的职业怀疑。本工具帮助你快速识别、评估并应对这类威胁。
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat"><b>4</b><span>类威胁情形</span></div>
+          <div class="hero__stat"><b>14</b><span>道自测题目</span></div>
+          <div class="hero__stat"><b>3</b><span>个情景演练</span></div>
+          <div class="hero__stat"><b>100%</b><span>本地处理</span></div>
+        </div>
+        <div style="margin-top: 28px;">
+          <button class="btn" id="btn-start">开始识别 →</button>
+        </div>
+      </div>
+      <aside class="hero__panel">
+        <h3>你将在本网站了解</h3>
+        <ul>
+          <li>密切关系威胁的定义与判定要点</li>
+          <li>四类典型情形的防范措施</li>
+          <li>通过问卷自测评估独立性风险</li>
+          <li>真实案例（安永、安然/安达信）</li>
+          <li>可落地的合规防范清单</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 威胁情形知识库 -->
+  <section class="section" id="knowledge">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">Knowledge Base</div>
+        <h2 class="section__title">四类典型威胁情形</h2>
+        <p class="section__desc">
+          密切关系威胁源于审计师与被审计单位之间的亲密、信任或熟悉关系，可分为以下四类情形。
+        </p>
+      </div>
+      <div class="grid grid--2" id="threat-types"></div>
+    </div>
+  </section>
+
+  <!-- 威胁自测 -->
+  <section class="section section--alt" id="self-test">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">Self Assessment</div>
+        <h2 class="section__title">密切关系威胁自测</h2>
+        <p class="section__desc">
+          请根据实际情况回答下列问题。系统将计算风险等级并给出防范建议。所有数据仅保存在你的浏览器本地，不会上传。
+        </p>
+      </div>
+
+      <div class="quiz-toolbar">
+        <div class="progress"><div class="progress__bar" id="progress-bar"></div></div>
+        <span id="progress-label">已答 0 / 14</span>
+      </div>
+
+      <div id="questions-wrap"></div>
+
+      <div id="result-wrap" style="margin-top: 24px;"></div>
+
+      <div class="privacy-note">
+        🔒 <strong>隐私说明：</strong>本工具为纯前端应用，测评结果与报告均在你的设备本地生成，
+        不经过任何服务器、不上传云端。测评结论仅供教学与自我评估参考，不构成法律或审计意见。
+      </div>
+    </div>
+  </section>
+
+  <!-- 情景演练 -->
+  <section class="section" id="scenarios">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">Scenario Drill</div>
+        <h2 class="section__title">情景决策演练</h2>
+        <p class="section__desc">代入审计人员角色，做出你的职业判断，即时查看结果与解析。</p>
+      </div>
+      <div id="scenarios-wrap"></div>
+    </div>
+  </section>
+
+  <!-- 案例库 -->
+  <section class="section section--alt" id="cases">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">Case Studies</div>
+        <h2 class="section__title">真实案例库</h2>
+        <p class="section__desc">从真实监管案例中理解密切关系威胁的后果与启示。</p>
+      </div>
+      <div class="grid grid--3" id="cases-wrap"></div>
+    </div>
+  </section>
+
+  <!-- 防范清单 -->
+  <section class="section" id="safeguards">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">Compliance Checklist</div>
+        <h2 class="section__title">防范措施清单</h2>
+        <p class="section__desc">勾选你所在团队已落实的防范措施，对照检查独立性管理。</p>
+      </div>
+      <p id="safeguard-summary"></p>
+      <div id="safeguards-wrap"></div>
+    </div>
+  </section>
+
+  <!-- AI 辅助问答 -->
+  <section class="section section--alt" id="ai-assistant">
+    <div class="container">
+      <div class="section__head">
+        <div class="section__kicker">AI Assistant</div>
+        <h2 class="section__title">AI 辅助问答</h2>
+        <p class="section__desc">
+          描述你的具体情境，AI 助手（基于 DeepSeek）将结合审计独立性原则，判断是否存在密切关系威胁并给出防范建议。
+        </p>
+      </div>
+
+      <div class="chat">
+        <div class="chat__list" id="chat-list"></div>
+        <div class="chat__examples" id="ai-examples"></div>
+        <div class="chat__input">
+          <textarea id="ai-input" rows="2" placeholder="例如：好朋友在其他部门工作，今天约我一起吃饭还给我带了礼物，我应该接受吗？"></textarea>
+          <div class="chat__actions">
+            <button class="btn btn--ghost" id="btn-clear-chat">清空对话</button>
+            <button class="btn btn--primary" id="btn-send">发送</button>
+          </div>
+        </div>
+        <p class="privacy-note" style="margin-top:16px;">
+          ⚠️ 本功能由 DeepSeek 大模型提供，回答仅供参考，不构成法律或审计意见。发送的问题会传输至 DeepSeek API 处理。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>密切关系威胁识别</strong>
+        <p style="margin: 6px 0 0;">审计 · 鉴证业务 · 独立性教育工具</p>
+      </div>
+      <div>
+        <p style="margin: 0 0 6px;">内容依据《中国注册会计师职业道德守则》等公开资料整理</p>
+        <p style="margin: 0;">可接入 GitHub，部署于 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> · © <span id="year"></span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js").catch(function (err) {
+        console.warn("Service Worker 注册失败：", err);
+      });
+    }
+  </script>
+</body>
+</html>
